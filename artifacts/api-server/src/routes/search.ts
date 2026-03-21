@@ -16,6 +16,24 @@ function parseRating(ratingStr: string | null | undefined): number | null {
   return isNaN(num) ? null : num;
 }
 
+const accessoryWords = ['case', 'cover', 'protector', 'glass', 'cable', 'adapter', 'strap', 'pouch', 'stand', 'skin', 'sleeve', 'holder', 'mount', 'charger', 'plug', 'dock'];
+
+function universalFilter(products: ProductResult[], userQuery: string): ProductResult[] {
+  const query = userQuery.toLowerCase();
+  const queryIsAccessory = accessoryWords.some(word => query.includes(word));
+
+  return products.filter(item => {
+    const title = item.title.toLowerCase();
+    const price = item.price;
+    const titleIsAccessory = accessoryWords.some(word => title.includes(word));
+
+    if (titleIsAccessory && !queryIsAccessory) return false;
+    if (price !== null && price < 1000 && !queryIsAccessory) return false;
+
+    return true;
+  });
+}
+
 interface ProductResult {
   id: string;
   title: string;
@@ -205,7 +223,8 @@ router.get("/search", async (req: Request, res: Response) => {
   }
 
   const resultSets = await Promise.all(searchTasks);
-  const allResults: ProductResult[] = resultSets.flat();
+  const rawResults: ProductResult[] = resultSets.flat();
+  const allResults: ProductResult[] = universalFilter(rawResults, query);
 
   allResults.sort((a, b) => {
     if (a.price === null && b.price === null) return 0;
