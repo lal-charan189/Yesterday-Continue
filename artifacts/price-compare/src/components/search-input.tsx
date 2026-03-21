@@ -14,10 +14,9 @@ export function SearchInput({ initialValue = "", autoFocus = false }: { initialV
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative w-full max-w-3xl mx-auto group">
-      <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-primary rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-500"></div>
-      <div className="relative flex items-center bg-[#0a0a0f] rounded-2xl border border-white/10 shadow-2xl overflow-hidden focus-within:border-primary/50 transition-colors duration-300">
-        <div className="pl-6 text-muted">
+    <form onSubmit={handleSubmit} className="relative w-full max-w-3xl mx-auto">
+      <div className="relative flex items-center bg-[#111111] rounded-2xl border border-white/10 shadow-2xl overflow-hidden focus-within:border-white/25 transition-colors duration-300">
+        <div className="pl-6 text-white/30">
           <Search className="w-6 h-6" />
         </div>
         <input
@@ -26,12 +25,12 @@ export function SearchInput({ initialValue = "", autoFocus = false }: { initialV
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search for laptops, phones, shoes..."
           autoFocus={autoFocus}
-          className="w-full py-5 px-4 bg-transparent text-white placeholder:text-muted/70 focus:outline-none text-lg font-medium"
+          className="w-full py-5 px-4 bg-transparent text-white placeholder:text-white/25 focus:outline-none text-lg font-medium"
         />
         <button 
           type="submit"
           disabled={!query.trim()}
-          className="mx-2 p-3 rounded-xl bg-primary hover:bg-primary/90 text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+          className="mx-2 p-3 rounded-xl bg-white text-black disabled:opacity-20 disabled:cursor-not-allowed hover:bg-white/90 transition-all duration-200"
         >
           <ArrowRight className="w-6 h-6" />
         </button>

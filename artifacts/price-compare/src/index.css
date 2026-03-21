@@ -5,29 +5,29 @@
   --font-display: 'Outfit', sans-serif;
   --font-sans: 'Plus Jakarta Sans', sans-serif;
 
-  --color-background: #030305;
-  --color-foreground: #F8F9FA;
+  --color-background: #080808;
+  --color-foreground: #F0F0F0;
   
-  --color-card: rgba(15, 15, 20, 0.4);
-  --color-card-border: rgba(255, 255, 255, 0.06);
-  --color-card-hover: rgba(25, 25, 35, 0.6);
+  --color-card: rgba(14, 14, 14, 0.8);
+  --color-card-border: rgba(255, 255, 255, 0.07);
+  --color-card-hover: rgba(22, 22, 22, 0.9);
   
-  --color-primary: #7C3AED;
-  --color-primary-foreground: #FFFFFF;
-  --color-primary-glow: rgba(124, 58, 237, 0.5);
+  --color-primary: #FFFFFF;
+  --color-primary-foreground: #000000;
+  --color-primary-glow: rgba(255, 255, 255, 0.08);
   
-  --color-secondary: #1F2937;
-  --color-secondary-foreground: #F3F4F6;
+  --color-secondary: #1A1A1A;
+  --color-secondary-foreground: #D0D0D0;
   
-  --color-accent: #00F0FF;
-  --color-accent-glow: rgba(0, 240, 255, 0.4);
+  --color-accent: #AAAAAA;
+  --color-accent-glow: rgba(180, 180, 180, 0.1);
   
-  --color-muted: #8B8D98;
-  --color-muted-border: rgba(139, 141, 152, 0.2);
+  --color-muted: #666666;
+  --color-muted-border: rgba(100, 100, 100, 0.2);
 
-  --color-amazon: #FF9900;
-  --color-flipkart: #2874F0;
-  --color-bestdeal: #FFD700;
+  --color-amazon: #888888;
+  --color-flipkart: #999999;
+  --color-bestdeal: #E0E0E0;
   
   --color-destructive: #EF4444;
 }
@@ -38,11 +38,7 @@
 
 @layer base {
   body {
-    @apply bg-background text-foreground antialiased font-sans min-h-screen selection:bg-primary/30 selection:text-white;
-    background-image: 
-      radial-gradient(circle at 15% 50%, rgba(124, 58, 237, 0.05), transparent 25%),
-      radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.05), transparent 25%);
-    background-attachment: fixed;
+    @apply bg-background text-foreground antialiased font-sans min-h-screen selection:bg-white/20 selection:text-white;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -64,18 +60,18 @@
   }
 
   .text-glow {
-    text-shadow: 0 0 20px var(--color-primary-glow);
+    text-shadow: 0 0 20px rgba(255,255,255,0.15);
   }
   
   .border-glow {
-    box-shadow: 0 0 15px -3px var(--color-primary-glow), inset 0 0 10px -3px var(--color-primary-glow);
+    box-shadow: 0 0 15px -3px rgba(255,255,255,0.06);
   }
   
   .border-glow-accent {
-    box-shadow: 0 0 15px -3px var(--color-accent-glow), inset 0 0 10px -3px var(--color-accent-glow);
+    box-shadow: 0 0 15px -3px rgba(255,255,255,0.05);
   }
   
   .border-glow-gold {
-    box-shadow: 0 0 20px -5px rgba(255, 215, 0, 0.3), inset 0 0 15px -5px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 20px -5px rgba(255,255,255,0.08);
   }
 }
