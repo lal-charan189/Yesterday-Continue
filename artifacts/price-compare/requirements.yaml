@@ -1,0 +1,13 @@
+packages:
+  "framer-motion": "For sleek, futuristic page transitions and staggered list animations"
+  "clsx": "For conditional class names"
+  "tailwind-merge": "For merging tailwind classes safely"
+
+images:
+  - path: "artifacts/price-compare/public/images/hero-bg.png"
+    description: "Abstract, very dark futuristic background with deep indigo and neon cyan glowing subtle lines and light leaks, minimalistic, 4k, dark mode"
+    aspect_ratio: "16:9"
+
+notes:
+  - Assuming @workspace/api-client-react exports useSearchProducts and ProductResult types
+  - Using wouter's useSearch hook for query parameters

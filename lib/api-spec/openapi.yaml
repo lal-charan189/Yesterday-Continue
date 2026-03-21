@@ -1,15 +1,16 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: PriceHunt API - Price comparison across Amazon and Flipkart
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: search
+    description: Product search and price comparison
 paths:
   /healthz:
     get:
@@ -24,6 +25,44 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /search:
+    get:
+      operationId: searchProducts
+      tags: [search]
+      summary: Search products across platforms
+      description: Searches for products on Amazon and Flipkart and returns unified results sorted by price
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Search query
+        - name: platforms
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Comma-separated list of platforms to search (amazon,flipkart). Defaults to all.
+      responses:
+        "200":
+          description: Search results from all platforms
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResponse"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +72,80 @@ components:
           type: string
       required:
         - status
-
+    ProductResult:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        price:
+          type: number
+          nullable: true
+        originalPrice:
+          type: number
+          nullable: true
+        discount:
+          type: string
+          nullable: true
+        rating:
+          type: number
+          nullable: true
+        ratingCount:
+          type: string
+          nullable: true
+        image:
+          type: string
+          nullable: true
+        url:
+          type: string
+        platform:
+          type: string
+          enum: [amazon, flipkart]
+        isBestDeal:
+          type: boolean
+      required:
+        - id
+        - title
+        - price
+        - originalPrice
+        - discount
+        - rating
+        - ratingCount
+        - image
+        - url
+        - platform
+        - isBestDeal
+    SearchResponse:
+      type: object
+      properties:
+        query:
+          type: string
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductResult"
+        totalResults:
+          type: integer
+        platforms:
+          type: array
+          items:
+            type: string
+        searchDurationMs:
+          type: integer
+      required:
+        - query
+        - results
+        - totalResults
+        - platforms
+        - searchDurationMs
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      required:
+        - error
+        - message
