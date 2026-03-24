@@ -28,8 +28,6 @@ function Router() {
 }
 
 function App() {
-  console.log("[v0] App component rendering");
-  console.log("[v0] BASE_URL:", import.meta.env.BASE_URL);
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>

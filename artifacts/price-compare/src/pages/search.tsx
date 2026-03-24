@@ -2,7 +2,7 @@ import { Layout } from "@/components/layout";
 import { SearchInput } from "@/components/search-input";
 import { ProductCard, ProductCardSkeleton } from "@/components/product-card";
 import { useSearch } from "wouter";
-import { useSearchProducts } from "@workspace/api-client-react";
+import { useSearchProducts } from "@/api";
 import { usePreferences } from "@/hooks/use-preferences";
 import { SlidersHorizontal, AlertTriangle, PackageSearch } from "lucide-react";
 import { motion } from "framer-motion";
