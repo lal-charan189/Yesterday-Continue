@@ -20,6 +20,7 @@ export default function SearchResults() {
     { q, platforms: platformsStr },
     { 
       query: { 
+        queryKey: ['/api/search', { q, platforms: platformsStr }],
         enabled: !!q && preferences.platforms.length > 0,
         staleTime: 5 * 60 * 1000 // 5 mins
       } 
