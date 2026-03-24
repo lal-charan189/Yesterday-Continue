@@ -2,7 +2,8 @@ import { Layout } from "@/components/layout";
 import { SearchInput } from "@/components/search-input";
 import { ProductCard, ProductCardSkeleton } from "@/components/product-card";
 import { useSearch } from "wouter";
-import { useSearchProducts } from "@workspace/api-client-react";
+import { useSearchProducts } from "@/api";
+import type { ProductResult } from "@/api/api.schemas";
 import { usePreferences } from "@/hooks/use-preferences";
 import { SlidersHorizontal, AlertTriangle, PackageSearch } from "lucide-react";
 import { motion } from "framer-motion";
@@ -19,6 +20,7 @@ export default function SearchResults() {
     { q, platforms: platformsStr },
     { 
       query: { 
+        queryKey: ['/api/search', { q, platforms: platformsStr }],
         enabled: !!q && preferences.platforms.length > 0,
         staleTime: 5 * 60 * 1000 // 5 mins
       } 
@@ -86,7 +88,7 @@ export default function SearchResults() {
 
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {data?.results.map((product, i) => (
+        {data?.results.map((product: ProductResult, i: number) => (
           <ProductCard key={product.id} product={product} index={i} />
         ))}
       </div>
@@ -119,7 +121,7 @@ export default function SearchResults() {
                   </span>
                   <div className="h-4 w-px bg-white/10"></div>
                   <div className="flex gap-2">
-                    {data.platforms.map(p => (
+                    {data.platforms.map((p: string) => (
                       <span key={p} className="capitalize text-white/60 bg-white/5 px-2 py-0.5 rounded-md border border-white/5">
                         {p}
                       </span>
